@@ -13,6 +13,9 @@ local example = library:CreateWindow({
   text = "Taxi Boss"
 })
 ```
+
+# Button
+
 ```lua
 example:AddButton("Auto write",function()
 print("gay")
