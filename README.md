@@ -21,3 +21,8 @@ example:AddButton("Auto write",function()
 print("gay")
 end)
 ```
+# Toggle
+
+```lua
+example:AddToggle("Auto Collect Parts", function(state)
+```
