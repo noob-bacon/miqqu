@@ -35,3 +35,9 @@ example:AddToggle("Auto sec", function(state)
 print("gay")
 end)
 ```
+
+# Dropdown
+
+```lua
+example:AddDropdown({"Teleports","Beechwood","Beechwood Beach","Boss Airport","Bridgeview","Cedar Side","Central Bank","Central City","City Park","Coconut Park","Country Club","Da Hills","Doge Harbor"},function(state) --true/false, replaces the current title "Dropdown" with the option
+```
