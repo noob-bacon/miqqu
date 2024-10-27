@@ -14,6 +14,13 @@ local example = library:CreateWindow({
 })
 ```
 
+# Label
+
+```lua
+example:AddLabel("Teleports 1",function()
+      end)
+```
+
 # Button
 
 ```lua
