@@ -8,8 +8,8 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 
 # Window
 
-'''lua
+```lua
 local example = library:CreateWindow({
   text = "Taxi Boss"
 })
-'''
+```
