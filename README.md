@@ -24,5 +24,7 @@ end)
 # Toggle
 
 ```lua
-example:AddToggle("Auto Collect Parts", function(state)
+example:AddToggle("Auto sec", function(state)
+print("gay")
+end)
 ```
