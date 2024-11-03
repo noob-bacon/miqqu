@@ -9,7 +9,7 @@ if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid
 wait(1)
 
 do local GUI = game.CoreGui:FindFirstChild("Darkrai");if GUI then GUI:Destroy();end;if _G.Color == nil then
-       _G.Color = Color3.fromRGB(255, 255, 255)
+       _G.Color = Color3.fromRGB(245, 245, 245)
    end 
 end
 
@@ -100,7 +100,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   Main.Parent = Darkrai
   Main.ClipsDescendants = true
   Main.AnchorPoint = Vector2.new(0.5,0.5)
-  Main.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+  Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
   Main.Position = UDim2.new(0.5, 0, 0.5, 0)
   Main.Size = UDim2.new(0, 0, 0, 0)
 
@@ -113,7 +113,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   local Top = Instance.new("Frame")
   Top.Name = "Top"
   Top.Parent = Main
-  Top.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+  Top.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
   Top.Size = UDim2.new(0, 656, 0, 27)
 
   local TCNR = Instance.new("UICorner")
@@ -138,7 +138,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   Name.Size = UDim2.new(0, 61, 0, 27)
   Name.Font = Enum.Font.GothamSemibold
   Name.Text = hubname
-  Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+  Name.TextColor3 = Color3.fromRGB(245, 245, 245)
   Name.TextSize = 17.000
 
   local Hub = Instance.new("TextLabel")
@@ -150,7 +150,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   Hub.Size = UDim2.new(0, 81, 0, 27)
   Hub.Font = Enum.Font.GothamSemibold
   Hub.Text = "  | "..gamename
-  Hub.TextColor3 = Color3.fromRGB(255, 255, 255)
+  Hub.TextColor3 = Color3.fromRGB(245, 245, 245)
   Hub.TextSize = 17.000
   Hub.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -163,13 +163,13 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   BindButton.Size = UDim2.new(0, 100, 0, 27)
   BindButton.Font = Enum.Font.GothamSemibold
   BindButton.Text = "[RightControl]"
-  BindButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+  BindButton.TextColor3 = Color3.fromRGB(245, 245, 245)
   BindButton.TextSize = 13.000
 
   local Tab = Instance.new("Frame")
   Tab.Name = "Tab"
   Tab.Parent = Main
-  Tab.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+  Tab.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
   Tab.Position = UDim2.new(0, 5, 0, 30)
   Tab.Size = UDim2.new(0, 150, 0, 365)
 
@@ -202,7 +202,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   local Page = Instance.new("Frame")
   Page.Name = "Page"
   Page.Parent = Main
-  Page.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+  Page.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
   Page.Position = UDim2.new(0.245426834, 0, 0.075000003, 0)
   Page.Size = UDim2.new(0, 490, 0, 365)
 
