@@ -100,7 +100,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   Main.Parent = Darkrai
   Main.ClipsDescendants = true
   Main.AnchorPoint = Vector2.new(0.5,0.5)
-  Main.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+  Main.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
   Main.Position = UDim2.new(0.5, 0, 0.5, 0)
   Main.Size = UDim2.new(0, 0, 0, 0)
 
