@@ -100,7 +100,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   Main.Parent = Darkrai
   Main.ClipsDescendants = true
   Main.AnchorPoint = Vector2.new(0.5,0.5)
-  Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+  Main.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
   Main.Position = UDim2.new(0.5, 0, 0.5, 0)
   Main.Size = UDim2.new(0, 0, 0, 0)
 
@@ -252,252 +252,254 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   local uitab = {}
 
   function uitab:Tab(text)
-    local TabButton = Instance.new("TextButton")
-    TabButton.Parent = ScrollTab
-    TabButton.Name = text.."Server"
-    TabButton.Text = text
-    TabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-      TabButton.BorderColor3 = Color3.fromRGB(147,112,219)
-        TabButton.BorderSizePixel = 3
-    TabButton.Size = UDim2.new(0, 130, 0, 23)
-    TabButton.Font = Enum.Font.GothamSemibold
-    TabButton.TextColor3 = Color3.fromRGB(225, 225, 225)
-    TabButton.TextSize = 15.000
-    TabButton.TextTransparency = 0.500
+      local TabButton = Instance.new("TextButton")
+      TabButton.Parent = ScrollTab
+      TabButton.Name = text.."Server"
+      TabButton.Text = text
+      TabButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Changed here
+      TabButton.BorderColor3 = Color3.fromRGB(245, 245, 245)  -- Changed here
+      TabButton.BorderSizePixel = 3
+      TabButton.Size = UDim2.new(0, 130, 0, 23)
+      TabButton.Font = Enum.Font.GothamSemibold
+      TabButton.TextColor3 = Color3.fromRGB(225, 225, 225)
+      TabButton.TextSize = 15.000
+      TabButton.TextTransparency = 0.500
 
-    local MainFramePage = Instance.new("ScrollingFrame")
-    MainFramePage.Name = text.."_Page"
-    MainFramePage.Parent = PageList
-    MainFramePage.Active = true
-    MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    MainFramePage.BackgroundTransparency = 1.000
-    MainFramePage.BorderSizePixel = 0
-    MainFramePage.Size = UDim2.new(0, 490, 0, 365)
-    MainFramePage.CanvasSize = UDim2.new(0, 0, 0, 0)
-    MainFramePage.ScrollBarThickness = 0
+      local MainFramePage = Instance.new("ScrollingFrame")
+      MainFramePage.Name = text.."_Page"
+      MainFramePage.Parent = PageList
+      MainFramePage.Active = true
+      MainFramePage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+      MainFramePage.BackgroundTransparency = 1.000
+      MainFramePage.BorderSizePixel = 0
+      MainFramePage.Size = UDim2.new(0, 490, 0, 365)
+      MainFramePage.CanvasSize = UDim2.new(0, 0, 0, 0)
+      MainFramePage.ScrollBarThickness = 0
 
-    local UIPadding = Instance.new("UIPadding")
-    local UIListLayout = Instance.new("UIListLayout")
+      local UIPadding = Instance.new("UIPadding")
+      local UIListLayout = Instance.new("UIListLayout")
 
-    UIPadding.Parent = MainFramePage
-    UIPadding.PaddingLeft = UDim.new(0, 10)
-    UIPadding.PaddingTop = UDim.new(0, 10)
+      UIPadding.Parent = MainFramePage
+      UIPadding.PaddingLeft = UDim.new(0, 10)
+      UIPadding.PaddingTop = UDim.new(0, 10)
 
-    UIListLayout.Padding = UDim.new(0,15)
-    UIListLayout.Parent = MainFramePage
-    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+      UIListLayout.Padding = UDim.new(0, 15)
+      UIListLayout.Parent = MainFramePage
+      UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
-    TabButton.MouseButton1Click:Connect(function()
-      for i,v in next, ScrollTab:GetChildren() do
-        if v:IsA("TextButton") then
-          TweenService:Create(
-            v,
-            TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-            {TextTransparency = 0.5}
-          ):Play()
-        end
-        TweenService:Create(
-          TabButton,
-          TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-          {TextTransparency = 0}
-        ):Play()
+      TabButton.MouseButton1Click:Connect(function()
+          for i, v in next, ScrollTab:GetChildren() do
+              if v:IsA("TextButton") then
+                  TweenService:Create(
+                      v,
+                      TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                      {TextTransparency = 0.5}
+                  ):Play()
+              end
+              TweenService:Create(
+                  TabButton,
+                  TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                  {TextTransparency = 0}
+              ):Play()
+          end
+          for i, v in next, PageList:GetChildren() do
+              currentpage = string.gsub(TabButton.Name, "Server", "").."_Page"
+              if v.Name == currentpage then
+                  UIPageLayout:JumpTo(v)
+              end
+          end
+      end)
+
+      if abc == false then
+          for i, v in next, ScrollTab:GetChildren() do
+              if v:IsA("TextButton") then
+                  TweenService:Create(
+                      v,
+                      TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                      {TextTransparency = 0.5}
+                  ):Play()
+              end
+              TweenService:Create(
+                  TabButton,
+                  TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                  {TextTransparency = 0}
+              ):Play()
+          end
+          UIPageLayout:JumpToIndex(1)
+          abc = true
       end
-      for i,v in next, PageList:GetChildren() do
-        currentpage = string.gsub(TabButton.Name,"Server","").."_Page"
-        if v.Name == currentpage then
-          UIPageLayout:JumpTo(v)
-        end
+
+      game:GetService("RunService").Stepped:Connect(function()
+          pcall(function()
+              MainFramePage.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 20)
+              ScrollTab.CanvasSize = UDim2.new(0, 0, 0, PLL.AbsoluteContentSize.Y + 20)
+          end)
+      end)
+
+      local main = {}
+      function main:Button(text, callback)
+          local Button = Instance.new("Frame")
+          local UICorner = Instance.new("UICorner")
+          local TextBtn = Instance.new("TextButton")
+          local UICorner_2 = Instance.new("UICorner")
+          local Black = Instance.new("Frame")
+          local UICorner_3 = Instance.new("UICorner")
+
+          Button.Name = "Button"
+          Button.Parent = MainFramePage
+          Button.BackgroundColor3 = _G.Color
+          Button.Size = UDim2.new(0, 470, 0, 31)
+
+          UICorner.CornerRadius = UDim.new(0, 5)
+          UICorner.Parent = Button
+
+          TextBtn.Name = "TextBtn"
+          TextBtn.Parent = Button
+          TextBtn.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Changed here
+          TextBtn.Position = UDim2.new(0, 1, 0, 1)
+          TextBtn.Size = UDim2.new(0, 468, 0, 29)
+          TextBtn.AutoButtonColor = false
+          TextBtn.Font = Enum.Font.GothamSemibold
+          TextBtn.Text = text
+          TextBtn.TextColor3 = Color3.fromRGB(225, 225, 225)
+          TextBtn.TextSize = 15.000
+
+          UICorner_2.CornerRadius = UDim.new(0, 5)
+          UICorner_2.Parent = TextBtn
+
+          Black.Name = "Black"
+          Black.Parent = Button
+          Black.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+          Black.BackgroundTransparency = 1.000
+          Black.BorderSizePixel = 0
+          Black.Position = UDim2.new(0, 1, 0, 1)
+          Black.Size = UDim2.new(0, 468, 0, 29)
+
+          UICorner_3.CornerRadius = UDim.new(0, 5)
+          UICorner_3.Parent = Black
+
+          TextBtn.MouseEnter:Connect(function()
+              TweenService:Create(
+                  Black,
+                  TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                  {BackgroundTransparency = 0.7}
+              ):Play()
+          end)
+          TextBtn.MouseLeave:Connect(function()
+              TweenService:Create(
+                  Black,
+                  TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                  {BackgroundTransparency = 1}
+              ):Play()
+          end)
+          TextBtn.MouseButton1Click:Connect(function()
+              TextBtn.TextSize = 0
+              TweenService:Create(
+                  TextBtn,
+                  TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                  {TextSize = 15}
+              ):Play()
+              callback()
+          end)
       end
-    end)
 
-    if abc == false then
-      for i,v in next, ScrollTab:GetChildren() do
-        if v:IsA("TextButton") then
-          TweenService:Create(
-            v,
-            TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-            {TextTransparency = 0.5}
-          ):Play()
-        end
-        TweenService:Create(
-          TabButton,
-          TweenInfo.new(0.3,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-          {TextTransparency = 0}
-        ):Play()
+      function main:Toggle(text, config, callback)
+          config = config or false
+          local toggled = config
+          local Toggle = Instance.new("Frame")
+          local UICorner = Instance.new("UICorner")
+          local Button = Instance.new("TextButton")
+          local UICorner_2 = Instance.new("UICorner")
+          local Label = Instance.new("TextLabel")
+          local ToggleImage = Instance.new("Frame")
+          local UICorner_3 = Instance.new("UICorner")
+          local Circle = Instance.new("Frame")
+          local UICorner_4 = Instance.new("UICorner")
+
+          Toggle.Name = "Toggle"
+          Toggle.Parent = MainFramePage
+          Toggle.BackgroundColor3 = _G.Color
+          Toggle.Size = UDim2.new(0, 470, 0, 31)
+
+          UICorner.CornerRadius = UDim.new(0, 5)
+          UICorner.Parent = Toggle
+
+          Button.Name = "Button"
+          Button.Parent = Toggle
+          Button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Changed here
+          Button.Position = UDim2.new(0, 1, 0, 1)
+          Button.Size = UDim2.new(0, 468, 0, 29)
+          Button.AutoButtonColor = false
+          Button.Font = Enum.Font.SourceSans
+          Button.Text = ""
+          Button.TextColor3 = Color3.fromRGB(0, 0, 0)
+          Button.TextSize = 11.000
+
+          UICorner_2.CornerRadius = UDim.new(0, 5)
+          UICorner_2.Parent = Button
+
+          Label.Name = "Label"
+          Label.Parent = Toggle
+          Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+          Label.BackgroundTransparency = 1.000
+          Label.Position = UDim2.new(0, 1, 0, 1)
+          Label.Size = UDim2.new(0, 468, 0, 29)
+          Label.Font = Enum.Font.GothamSemibold
+          Label.Text = text
+          Label.TextColor3 = Color3.fromRGB(225, 225, 225)
+          Label.TextSize = 15.000
+
+          ToggleImage.Name = "ToggleImage"
+          ToggleImage.Parent = Toggle
+          ToggleImage.BackgroundColor3 = Color3.fromRGB(225, 225, 225)
+          ToggleImage.Position = UDim2.new(0, 415, 0, 5)
+          ToggleImage.Size = UDim2.new(0, 45, 0, 20)
+
+          UICorner_3.CornerRadius = UDim.new(0, 10)
+          UICorner_3.Parent = ToggleImage
+
+          Circle.Name = "Circle"
+          Circle.Parent = ToggleImage
+          Circle.BackgroundColor3 = Color3.fromRGB(227, 60, 60)
+          Circle.Position = UDim2.new(0, 2, 0, 2)
+          Circle.Size = UDim2.new(0, 16, 0, 16)
+
+          UICorner_4.CornerRadius = UDim.new(0, 10)
+          UICorner_4.Parent = Circle
+
+          Button.MouseButton1Click:Connect(function()
+              if toggled == false then
+                  toggled = true
+                  Circle:TweenPosition(UDim2.new(0, 27, 0, 2), "Out", "Sine", 0.2, true)
+                  TweenService:Create(
+                      Circle,
+                      TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                      {BackgroundColor3 = _G.Color}
+                  ):Play()
+              else
+                  toggled = false
+                  Circle:TweenPosition(UDim2.new(0, 2, 0, 2), "Out", "Sine", 0.2, true)
+                  TweenService:Create(
+                      Circle,
+                      TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                      {BackgroundColor3 = Color3.fromRGB(227, 60, 110)}
+                  ):Play()
+              end
+              pcall(callback, toggled)
+          end)
+
+          if config == true then
+              toggled = true
+              Circle:TweenPosition(UDim2.new(0, 27, 0, 2), "Out", "Sine", 0.4, true)
+              TweenService:Create(
+                  Circle,
+                  TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+                  {BackgroundColor3 = _G.Color}
+              ):Play()
+              pcall(callback, toggled)
+          end
       end
-      UIPageLayout:JumpToIndex(1)
-      abc = true
-    end
-
-    game:GetService("RunService").Stepped:Connect(function()
-      pcall(function()
-        MainFramePage.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 20)
-        ScrollTab.CanvasSize = UDim2.new(0,0,0,PLL.AbsoluteContentSize.Y + 20)
-      end)
-    end)
-
-    local main = {}
-    function main:Button(text,callback)
-      local Button = Instance.new("Frame")
-      local UICorner = Instance.new("UICorner")
-      local TextBtn = Instance.new("TextButton")
-      local UICorner_2 = Instance.new("UICorner")
-      local Black = Instance.new("Frame")
-      local UICorner_3 = Instance.new("UICorner")
-
-      Button.Name = "Button"
-      Button.Parent = MainFramePage
-      Button.BackgroundColor3 = _G.Color
-      Button.Size = UDim2.new(0, 470, 0, 31)
-
-      UICorner.CornerRadius = UDim.new(0, 5)
-      UICorner.Parent = Button
-
-      TextBtn.Name = "TextBtn"
-      TextBtn.Parent = Button
-      TextBtn.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-      TextBtn.Position = UDim2.new(0, 1, 0, 1)
-      TextBtn.Size = UDim2.new(0, 468, 0, 29)
-      TextBtn.AutoButtonColor = false
-      TextBtn.Font = Enum.Font.GothamSemibold
-      TextBtn.Text = text
-      TextBtn.TextColor3 = Color3.fromRGB(225, 225, 225)
-      TextBtn.TextSize = 15.000
-
-      UICorner_2.CornerRadius = UDim.new(0, 5)
-      UICorner_2.Parent = TextBtn
-
-      Black.Name = "Black"
-      Black.Parent = Button
-      Black.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-      Black.BackgroundTransparency = 1.000
-      Black.BorderSizePixel = 0
-      Black.Position = UDim2.new(0, 1, 0, 1)
-      Black.Size = UDim2.new(0, 468, 0, 29)
-
-      UICorner_3.CornerRadius = UDim.new(0, 5)
-      UICorner_3.Parent = Black
-
-      TextBtn.MouseEnter:Connect(function()
-        TweenService:Create(
-          Black,
-          TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-          {BackgroundTransparency = 0.7}
-        ):Play()
-      end)
-      TextBtn.MouseLeave:Connect(function()
-        TweenService:Create(
-          Black,
-          TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-          {BackgroundTransparency = 1}
-        ):Play()
-      end)
-      TextBtn.MouseButton1Click:Connect(function()
-        TextBtn.TextSize = 0
-        TweenService:Create(
-          TextBtn,
-          TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-          {TextSize = 15}
-        ):Play()
-        callback()
-      end)
-    end
-    function main:Toggle(text,config,callback)
-      config = config or false
-      local toggled = config
-      local Toggle = Instance.new("Frame")
-      local UICorner = Instance.new("UICorner")
-      local Button = Instance.new("TextButton")
-      local UICorner_2 = Instance.new("UICorner")
-      local Label = Instance.new("TextLabel")
-      local ToggleImage = Instance.new("Frame")
-      local UICorner_3 = Instance.new("UICorner")
-      local Circle = Instance.new("Frame")
-      local UICorner_4 = Instance.new("UICorner")
-
-      Toggle.Name = "Toggle"
-      Toggle.Parent = MainFramePage
-      Toggle.BackgroundColor3 = _G.Color
-      Toggle.Size = UDim2.new(0, 470, 0, 31)
-
-      UICorner.CornerRadius = UDim.new(0, 5)
-      UICorner.Parent = Toggle
-
-      Button.Name = "Button"
-      Button.Parent = Toggle
-      Button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-      Button.Position = UDim2.new(0, 1, 0, 1)
-      Button.Size = UDim2.new(0, 468, 0, 29)
-      Button.AutoButtonColor = false
-      Button.Font = Enum.Font.SourceSans
-      Button.Text = ""
-      Button.TextColor3 = Color3.fromRGB(0, 0, 0)
-      Button.TextSize = 11.000
-
-      UICorner_2.CornerRadius = UDim.new(0, 5)
-      UICorner_2.Parent = Button
-
-      Label.Name = "Label"
-      Label.Parent = Toggle
-      Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-      Label.BackgroundTransparency = 1.000
-      Label.Position = UDim2.new(0, 1, 0, 1)
-      Label.Size = UDim2.new(0, 468, 0, 29)
-      Label.Font = Enum.Font.GothamSemibold
-      Label.Text = text
-      Label.TextColor3 = Color3.fromRGB(225, 225, 225)
-      Label.TextSize = 15.000
-
-      ToggleImage.Name = "ToggleImage"
-      ToggleImage.Parent = Toggle
-      ToggleImage.BackgroundColor3 = Color3.fromRGB(225, 225, 225)
-      ToggleImage.Position = UDim2.new(0, 415, 0, 5)
-      ToggleImage.Size = UDim2.new(0, 45, 0, 20)
-
-      UICorner_3.CornerRadius = UDim.new(0, 10)
-      UICorner_3.Parent = ToggleImage
-
-      Circle.Name = "Circle"
-      Circle.Parent = ToggleImage
-      Circle.BackgroundColor3 = Color3.fromRGB(227, 60, 60)
-      Circle.Position = UDim2.new(0, 2, 0, 2)
-      Circle.Size = UDim2.new(0, 16, 0, 16)
-
-      UICorner_4.CornerRadius = UDim.new(0, 10)
-      UICorner_4.Parent = Circle
-
-      Button.MouseButton1Click:Connect(function()
-        if toggled == false then
-          toggled = true
-          Circle:TweenPosition(UDim2.new(0,27,0,2),"Out","Sine",0.2,true)
-          TweenService:Create(
-            Circle,
-            TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-            {BackgroundColor3 = _G.Color}
-          ):Play()
-        else
-          toggled = false
-          Circle:TweenPosition(UDim2.new(0,2,0,2),"Out","Sine",0.2,true)
-          TweenService:Create(
-            Circle,
-            TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-            {BackgroundColor3 = Color3.fromRGB(227, 60, 110)}
-          ):Play()
-        end
-        pcall(callback,toggled)
-      end)
-
-      if config == true then
-        toggled = true
-        Circle:TweenPosition(UDim2.new(0,27,0,2),"Out","Sine",0.4,true)
-        TweenService:Create(
-          Circle,
-          TweenInfo.new(0.4,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-          {BackgroundColor3 = _G.Color}
-        ):Play()
-        pcall(callback,toggled)
-      end
-    end
+  end
     function main:Dropdown(text,option,callback)
       local isdropping = false
       local Dropdown = Instance.new("Frame")
