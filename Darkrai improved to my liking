@@ -154,17 +154,76 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   Hub.TextSize = 17.000
   Hub.TextXAlignment = Enum.TextXAlignment.Left
 
-  local BindButton = Instance.new("TextButton")
-  BindButton.Name = "BindButton"
-  BindButton.Parent = Top
-  BindButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-  BindButton.BackgroundTransparency = 1.000
-  BindButton.Position = UDim2.new(0.847561002, 0, 0, 0)
-  BindButton.Size = UDim2.new(0, 100, 0, 27)
-  BindButton.Font = Enum.Font.GothamSemibold
-  BindButton.Text = "[RightControl]"
-  BindButton.TextColor3 = Color3.fromRGB(245, 245, 245)
-  BindButton.TextSize = 13.000
+  local function ShowDate()
+    while true do
+        local MnthDay = os.date("%m %d");
+
+        local Holidays = {
+            ["01 01"] = "🎆",
+            ["12 25"] = "🎅",
+            ["10 31"] = "🎃",
+            ["07 04"] = "🎇",
+            ["02 14"] = "💘",
+            ["04 01"] = "🤡",
+            ["12 31"] = "🎊",
+            ["06 19"] = "🖤",
+            ["03 08"] = "🌸",
+            ["04 22"] = "🌍",
+            ["06 12"] = "🇵🇭",
+            ["12 10"] = "🎖",
+            ["08 23"] = "🏛",
+            ["04 24"] = "🇦🇲",
+            ["06 14"] = "🇺🇸",
+            ["10 29"] = "🇹🇷",
+            ["05 04"] = "🌟",
+            ["07 12"] = "❌🏳️‍🌈",
+            ["04 07"] = "🕊",
+            ["06 05"] = "♻️",
+            ["10 24"] = "🇺🇳",
+        }
+
+        local Tragedies = {
+            ["09 11"] = "✈️",
+            ["10 07"] = "🇮🇱",
+            ["24 02"] = "🇺🇦",
+        }
+
+        local Mentioning = Holidays[MnthDay] or Tragedies[MnthDay] or "📆";        
+        local CurrentDate = os.date("%b %d, %Y");
+        local Ping = string.format("%.2f ms", game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue());
+        Hub.Text = "              [Script Version: "..getgenv().CurrentVersion.."] | "..Mentioning.." | Ping: "..Ping.." | "..CurrentDate;
+        task.wait(0.35);
+    end
+  end
+
+  task.spawn(ShowDate);
+
+  local TimeButton = Instance.new("TextButton")
+  TimeButton.Name = "TimeButton"
+  TimeButton.Parent = Top
+  TimeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+  TimeButton.BackgroundTransparency = 1.000
+  TimeButton.Position = UDim2.new(0.847561002, 0, 0, 0)
+  TimeButton.Size = UDim2.new(0, 100, 0, 27)
+  TimeButton.Font = Enum.Font.GothamSemibold
+  TimeButton.TextColor3 = Color3.fromRGB(245, 245, 245)
+  TimeButton.TextSize = 15.000
+
+  local function ShowTime()
+    local startTime = tick()
+
+    while true do
+        local elapsedTime = tick() - startTime
+        local minutes = math.floor(elapsedTime / 60);
+        local seconds = math.floor(elapsedTime % 60);
+
+        TimeButton.Text = string.format("[%02d:%02d]",minutes,seconds);
+
+        task.wait(1);
+    end
+  end
+
+  task.spawn(ShowTime);
 
   local Tab = Instance.new("Frame")
   Tab.Name = "Tab"
@@ -425,7 +484,7 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
 
       Button.Name = "Button"
       Button.Parent = Toggle
-      Button.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+      Button.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
       Button.Position = UDim2.new(0, 1, 0, 1)
       Button.Size = UDim2.new(0, 468, 0, 29)
       Button.AutoButtonColor = false
