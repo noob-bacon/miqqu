@@ -149,9 +149,8 @@ function DarkraiX:Window(text,gamenme,logo,keybind)
   Hub.Position = UDim2.new(0, 110, 0, 0)
   Hub.Size = UDim2.new(0, 81, 0, 27)
   Hub.Font = Enum.Font.GothamSemibold
-  Hub.Text = "  | "..gamename
   Hub.TextColor3 = Color3.fromRGB(245, 245, 245)
-  Hub.TextSize = 17.000
+  Hub.TextSize = 16.000
   Hub.TextXAlignment = Enum.TextXAlignment.Left
 
   local function ShowDate()
