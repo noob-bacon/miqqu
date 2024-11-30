@@ -1,0 +1,23 @@
+local MacLib = loadstring(game:HttpGet("https://github.com/biggaboy212/Maclib/releases/latest/download/maclib.txt"))()
+local Window = MacLib:Window({
+    Title = "Bloxton mystery script",
+    Subtitle = "Free| V3.12",
+    Size = UDim2.fromOffset(868, 650),
+    DragStyle = 1,
+    DisabledWindowControls = {},
+    ShowUserInfo = true,
+    Keybind = Enum.KeyCode.F,
+    AcrylicBlur = true,
+})
+
+Window:Notify({
+    Title = "Loaded",
+    Description = "not very good",
+    Lifetime = 5
+})
+
+local Tab = TabGroup:Tab({
+  Name = chatlogs
+  Image <string> -- Image can be at maximum 16 pixels wide and 16 pixels tall.
+})
+
