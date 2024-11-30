@@ -1,5 +1,6 @@
--- Instances:
+-- Full Completed Script --
 
+-- Instances --
 local First = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local topbar = Instance.new("TextLabel")
@@ -14,8 +15,7 @@ local Maintab = Instance.new("ScrollingFrame")
 local TextButton = Instance.new("TextButton")
 local open = Instance.new("ImageButton")
 
---Properties:
-
+-- Properties --
 First.Name = "First"
 First.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 First.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -26,7 +26,7 @@ Main.AnchorPoint = Vector2.new(0.5, 0.5)
 Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Main.BorderSizePixel = 0
-Main.Position = UDim2.new(0.5, 0, 0.470588237, 0)
+Main.Position = UDim2.new(0.5, 0, 0.5, 0)
 Main.Size = UDim2.new(0, 400, 0, 300)
 
 topbar.Name = "topbar"
@@ -45,7 +45,7 @@ close.Parent = topbar
 close.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 close.BorderColor3 = Color3.fromRGB(0, 0, 0)
 close.BorderSizePixel = 0
-close.Position = UDim2.new(0.925000012, 0, 0, 0)
+close.Position = UDim2.new(0.925, 0, 0, 0)
 close.Size = UDim2.new(0, 30, 0, 30)
 close.Image = "rbxassetid://10734896206"
 
@@ -54,7 +54,7 @@ navigation.Parent = Main
 navigation.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 navigation.BorderColor3 = Color3.fromRGB(0, 0, 0)
 navigation.BorderSizePixel = 0
-navigation.Position = UDim2.new(0, 0, 0.100000001, 0)
+navigation.Position = UDim2.new(0, 0, 0.1, 0)
 navigation.Size = UDim2.new(0, 100, 0, 270)
 
 chatlogs.Name = "chatlogs"
@@ -87,39 +87,78 @@ chatlogsarea.Parent = Main
 chatlogsarea.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 chatlogsarea.BorderColor3 = Color3.fromRGB(0, 0, 0)
 chatlogsarea.BorderSizePixel = 0
-chatlogsarea.Position = UDim2.new(0.272500008, 0, 0.200000003, 0)
-chatlogsarea.Selectable = false
+chatlogsarea.Position = UDim2.new(0.275, 0, 0.2, 0)
 chatlogsarea.Size = UDim2.new(0, 276, 0, 230)
 chatlogsarea.Visible = false
-chatlogsarea.CanvasSize = UDim2.new(0, 0, 100, 0)
-chatlogsarea.ScrollBarThickness = 0
+chatlogsarea.CanvasSize = UDim2.new(0, 0, 0, 0)
+chatlogsarea.ScrollBarThickness = 8
 
 chatlogbutton.Name = "chatlogbutton"
 chatlogbutton.Parent = Main
 chatlogbutton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 chatlogbutton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 chatlogbutton.BorderSizePixel = 0
-chatlogbutton.Position = UDim2.new(0.367500007, 0, 0.100000001, 0)
+chatlogbutton.Position = UDim2.new(0.365, 0, 0.1, 0)
 chatlogbutton.Size = UDim2.new(0, 200, 0, 30)
-chatlogbutton.Visible = true
+chatlogbutton.Visible = false
 chatlogbutton.Font = Enum.Font.SourceSans
 chatlogbutton.Text = "Log Chat [ON]"
 chatlogbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
 chatlogbutton.TextSize = 20.000
 
--- Scripts:
+Maintab.Name = "Maintab"
+Maintab.Parent = Main
+Maintab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Maintab.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Maintab.BorderSizePixel = 0
+Maintab.Position = UDim2.new(0.305, 0, 0.14, 0)
+Maintab.Size = UDim2.new(0, 265, 0, 244)
+Maintab.Visible = true
+Maintab.ScrollBarThickness = 0
 
--- Toggle Chat Logs
+TextButton.Parent = Maintab
+TextButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.041, 0, 0.037, 0)
+TextButton.Size = UDim2.new(0, 64, 0, 48)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "ESP"
+TextButton.TextColor3 = Color3.fromRGB(245, 245, 245)
+TextButton.TextSize = 30.000
+
+-- Functions --
 local logging = true
+local prevOutputPos = 0
+
+-- Toggle between tabs
+local function toggleTabs(selectedTab)
+    if selectedTab == "ChatLogs" then
+        chatlogsarea.Visible = true
+        chatlogbutton.Visible = true
+        Maintab.Visible = false
+    elseif selectedTab == "Main" then
+        chatlogsarea.Visible = false
+        chatlogbutton.Visible = false
+        Maintab.Visible = true
+    end
+end
+
+-- Button Events
+chatlogs.MouseButton1Click:Connect(function()
+    toggleTabs("ChatLogs")
+end)
+
+Main_2.MouseButton1Click:Connect(function()
+    toggleTabs("Main")
+end)
 
 chatlogbutton.MouseButton1Click:Connect(function()
     logging = not logging
     chatlogbutton.Text = logging and "Log Chat [ON]" or "Log Chat [OFF]"
 end)
 
--- Log Player Chats
-local prevOutputPos = 0
-
+-- Chat Logging
 function logMessage(player, message)
     if not logging then return end
 
@@ -137,6 +176,7 @@ function logMessage(player, message)
     chatlogsarea.CanvasSize = UDim2.new(0, 0, 0, prevOutputPos)
 end
 
+-- Connect Player Chats
 for _, player in pairs(game.Players:GetPlayers()) do
     player.Chatted:Connect(function(message)
         logMessage(player, message)
@@ -148,4 +188,3 @@ game.Players.PlayerAdded:Connect(function(player)
         logMessage(player, message)
     end)
 end)
-
