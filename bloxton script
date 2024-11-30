@@ -1,23 +1,151 @@
-local MacLib = loadstring(game:HttpGet("https://github.com/biggaboy212/Maclib/releases/latest/download/maclib.txt"))()
-local Window = MacLib:Window({
-    Title = "Bloxton mystery script",
-    Subtitle = "Free| V3.12",
-    Size = UDim2.fromOffset(868, 650),
-    DragStyle = 1,
-    DisabledWindowControls = {},
-    ShowUserInfo = true,
-    Keybind = Enum.KeyCode.F,
-    AcrylicBlur = true,
-})
+-- Instances:
 
-Window:Notify({
-    Title = "Loaded",
-    Description = "not very good",
-    Lifetime = 5
-})
+local First = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local topbar = Instance.new("TextLabel")
+local close = Instance.new("ImageButton")
+local navigation = Instance.new("Frame")
+local chatlogs = Instance.new("TextButton")
+local UIListLayout = Instance.new("UIListLayout")
+local Main_2 = Instance.new("TextButton")
+local chatlogsarea = Instance.new("ScrollingFrame")
+local chatlogbutton = Instance.new("TextButton")
+local Maintab = Instance.new("ScrollingFrame")
+local TextButton = Instance.new("TextButton")
+local open = Instance.new("ImageButton")
 
-local Tab = TabGroup:Tab({
-  Name = chatlogs
-  Image <string> -- Image can be at maximum 16 pixels wide and 16 pixels tall.
-})
+--Properties:
+
+First.Name = "First"
+First.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+First.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Main.Name = "Main"
+Main.Parent = First
+Main.AnchorPoint = Vector2.new(0.5, 0.5)
+Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.5, 0, 0.470588237, 0)
+Main.Size = UDim2.new(0, 400, 0, 300)
+
+topbar.Name = "topbar"
+topbar.Parent = Main
+topbar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+topbar.BorderSizePixel = 0
+topbar.Size = UDim2.new(1, 0, 0, 30)
+topbar.Font = Enum.Font.SourceSans
+topbar.Text = "Bloxton Mystery Script"
+topbar.TextColor3 = Color3.fromRGB(245, 245, 245)
+topbar.TextSize = 25.000
+
+close.Name = "close"
+close.Parent = topbar
+close.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+close.BorderColor3 = Color3.fromRGB(0, 0, 0)
+close.BorderSizePixel = 0
+close.Position = UDim2.new(0.925000012, 0, 0, 0)
+close.Size = UDim2.new(0, 30, 0, 30)
+close.Image = "rbxassetid://10734896206"
+
+navigation.Name = "navigation"
+navigation.Parent = Main
+navigation.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+navigation.BorderColor3 = Color3.fromRGB(0, 0, 0)
+navigation.BorderSizePixel = 0
+navigation.Position = UDim2.new(0, 0, 0.100000001, 0)
+navigation.Size = UDim2.new(0, 100, 0, 270)
+
+chatlogs.Name = "chatlogs"
+chatlogs.Parent = navigation
+chatlogs.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+chatlogs.BorderColor3 = Color3.fromRGB(0, 0, 0)
+chatlogs.BorderSizePixel = 0
+chatlogs.Size = UDim2.new(0, 100, 0, 30)
+chatlogs.Font = Enum.Font.SourceSans
+chatlogs.Text = "ChatLogs"
+chatlogs.TextColor3 = Color3.fromRGB(245, 245, 245)
+chatlogs.TextSize = 20.000
+
+UIListLayout.Parent = navigation
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+Main_2.Name = "Main"
+Main_2.Parent = navigation
+Main_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main_2.BorderSizePixel = 0
+Main_2.Size = UDim2.new(0, 100, 0, 30)
+Main_2.Font = Enum.Font.SourceSans
+Main_2.Text = "Main"
+Main_2.TextColor3 = Color3.fromRGB(245, 245, 245)
+Main_2.TextSize = 20.000
+
+chatlogsarea.Name = "chatlogsarea"
+chatlogsarea.Parent = Main
+chatlogsarea.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+chatlogsarea.BorderColor3 = Color3.fromRGB(0, 0, 0)
+chatlogsarea.BorderSizePixel = 0
+chatlogsarea.Position = UDim2.new(0.272500008, 0, 0.200000003, 0)
+chatlogsarea.Selectable = false
+chatlogsarea.Size = UDim2.new(0, 276, 0, 230)
+chatlogsarea.Visible = false
+chatlogsarea.CanvasSize = UDim2.new(0, 0, 100, 0)
+chatlogsarea.ScrollBarThickness = 0
+
+chatlogbutton.Name = "chatlogbutton"
+chatlogbutton.Parent = Main
+chatlogbutton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+chatlogbutton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+chatlogbutton.BorderSizePixel = 0
+chatlogbutton.Position = UDim2.new(0.367500007, 0, 0.100000001, 0)
+chatlogbutton.Size = UDim2.new(0, 200, 0, 30)
+chatlogbutton.Visible = true
+chatlogbutton.Font = Enum.Font.SourceSans
+chatlogbutton.Text = "Log Chat [ON]"
+chatlogbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
+chatlogbutton.TextSize = 20.000
+
+-- Scripts:
+
+-- Toggle Chat Logs
+local logging = true
+
+chatlogbutton.MouseButton1Click:Connect(function()
+    logging = not logging
+    chatlogbutton.Text = logging and "Log Chat [ON]" or "Log Chat [OFF]"
+end)
+
+-- Log Player Chats
+local prevOutputPos = 0
+
+function logMessage(player, message)
+    if not logging then return end
+
+    local newMessage = Instance.new("TextLabel")
+    newMessage.Parent = chatlogsarea
+    newMessage.Text = player.Name .. ": " .. message
+    newMessage.Size = UDim2.new(1, -10, 0, 20)
+    newMessage.Position = UDim2.new(0, 5, 0, prevOutputPos)
+    newMessage.BackgroundTransparency = 1
+    newMessage.TextColor3 = Color3.fromRGB(0, 0, 0)
+    newMessage.Font = Enum.Font.SourceSans
+    newMessage.TextSize = 16
+
+    prevOutputPos = prevOutputPos + 25
+    chatlogsarea.CanvasSize = UDim2.new(0, 0, 0, prevOutputPos)
+end
+
+for _, player in pairs(game.Players:GetPlayers()) do
+    player.Chatted:Connect(function(message)
+        logMessage(player, message)
+    end)
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    player.Chatted:Connect(function(message)
+        logMessage(player, message)
+    end)
+end)
 
